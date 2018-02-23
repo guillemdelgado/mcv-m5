@@ -7,7 +7,7 @@ TODO: Abstract of the project
 | Authors  | Emails | Github |
 | ------------- | ------------- | ------------- |
 | Guillem Delgado  | guillem.delgado@gmail.com  | [guillemdelgado](https://github.com/guillemdelgado) |
-| Francisco Roldan  | fran.roldans@gmail.com | [franroldans](https://github.com/franroldans) |
+| Francisco Roldan | fran.roldans@gmail.com | [franroldans](https://github.com/franroldans) |
 | Jordi Gené | jordigenemola.1@gmail.com  | [Jordi-Gene-Mola](https://github.com/Jordi-Gene-Mola) |
 
 
