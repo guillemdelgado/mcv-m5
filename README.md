@@ -10,7 +10,8 @@ Summary
 | Francisco Roldan  | fran.roldans@gmail.com | [franroldans](https://github.com/franroldans) |
 | Jordi Gené | jordigenemola.1@gmail.com  | [Jordi-Gene-Mola](https://github.com/Jordi-Gene-Mola) |
 
-[robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as advisors.
+
+[robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as supervisors.
 
 
 ## Weekly papers
