@@ -1,5 +1,5 @@
 # Scene Understanding for Autonomous Vehicles
-Summary
+TODO: Abstract of the project
 
 ## Authors
 ### Name of the team
@@ -13,6 +13,9 @@ Summary
 
 [robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as supervisors.
 
+
+## Final report
+The final report details and summaries the work done weekly in the project. 
 
 ## Weekly papers
 - Overleaf document for Week 1 (T.B.A.)
@@ -33,4 +36,4 @@ Summary
 - Google slides for Week 7 (T.B.A.)
 
 ## References
-Post here the summary of the papers
+Post here the summary of the two papers to read
