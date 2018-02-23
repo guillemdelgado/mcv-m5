@@ -1,14 +1,29 @@
-# mcv-m5
-Master in Computer Vision - M5 Visual recognition
+# Scene Understanding for Autonomous Vehicles
+Summary
 
-## Fork this project
-Fork this project to start your group project. Add [robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as contributors.
+## Authors
+### Name of the team
 
-## Project description
-Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
+| Authors  | Emails | Github |
+| ------------- | ------------- | ------------- |
+| Guillem Delgado  | guillem.delgado@gmail.com  | [guillemdelgado](https://github.com/guillemdelgado) |
+| Francisco Roldan  | fran.roldans@gmail.com | [franroldans](https://github.com/franroldans) |
+| Jordi Gené | jordigenemola.1@gmail.com  | [Jordi-Gene-Mola](https://github.com/Jordi-Gene-Mola) |
 
-## Project slides
-- Google slides for [Week 1](https://docs.google.com/presentation/d/1A6hgbNn8N-Iq8MhSa_RPIyf87DBL6PCtoDzy1zqS5Xs/edit?usp=sharing)
+[robertbenavente](https://github.com/robertbenavente) and [lluisgomez](https://github.com/lluisgomez/) as advisors.
+
+
+## Weekly papers
+- Overleaf document for Week 1 (T.B.A.)
+- Overleaf document for Week 2 (T.B.A.)
+- Overleaf document for Week 3 (T.B.A.)
+- Overleaf document for Week 4 (T.B.A.) 
+- Overleaf document for Week 5 (T.B.A.)
+- Overleaf document for Week 6 (T.B.A.)
+- Overleaf document for Week 7 (T.B.A.)
+
+## Weekly slides
+- Google slides for Week 1 (T.B.A.)
 - Google slides for Week 2 (T.B.A.)
 - Google slides for Week 3 (T.B.A.)
 - Google slides for Week 4 (T.B.A.) 
@@ -16,14 +31,5 @@ Download the [Overleaf document](https://www.overleaf.com/read/qrjbtzwtjhmx)
 - Google slides for Week 6 (T.B.A.)
 - Google slides for Week 7 (T.B.A.)
 
-## Peer review
-- Intra-group evaluation form for Week 2 (T.B.A.)
-- Intra-group evaluation form for Weeks 3/4 (T.B.A.)
-- Intra-group evaluation form for Weeks 5/6 (T.B.A.)
-- Intra-group evaluation form for Week 7 (T.B.A.)
-
-## News
- - Improve your GitHub account following [this document](https://docs.google.com/document/d/14oxSKWBbMajIB5Bn2CM-DNb-vychY1f393qYfsHNJfY/edit?usp=sharing)
-
-## Groups
-   (T.B.A.)
+## References
+Post here the summary of the papers
