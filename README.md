@@ -36,4 +36,7 @@ The final report details and summaries the work done weekly in the project.
 - Google slides for Week 7 (T.B.A.)
 
 ## References
-Post here the summary of the two papers to read
+Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).
+He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
+
+[Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
