@@ -1,5 +1,5 @@
 # Scene Understanding for Autonomous Vehicles
-TODO: Abstract of the project
+This project aims to put in practice concepts and techniques to develop deep neural networks for being able to compute three main computer vision tasks: object detection, segmentation and recognition. These concepts will be applied in  an specific environent which is autonomous vehicles.
 
 ## Authors
 ### Name of the team
