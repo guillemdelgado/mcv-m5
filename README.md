@@ -15,10 +15,10 @@ TODO: Abstract of the project
 
 
 ## Final report
-The final report details and summaries the work done weekly in the project. 
+The final report details and summaries the work done weekly in the project can be found [here](https://www.overleaf.com/read/xhmmbwjhbnpr). 
 
 ## Weekly papers
-- Overleaf document for Week 1 (T.B.A.)
+- Overleaf document for Week 1 N/A
 - Overleaf document for Week 2 (T.B.A.)
 - Overleaf document for Week 3 (T.B.A.)
 - Overleaf document for Week 4 (T.B.A.) 
@@ -27,7 +27,7 @@ The final report details and summaries the work done weekly in the project.
 - Overleaf document for Week 7 (T.B.A.)
 
 ## Weekly slides
-- Google slides for Week 1 (T.B.A.)
+- Google slides for Week 1 N/A
 - Google slides for Week 2 (T.B.A.)
 - Google slides for Week 3 (T.B.A.)
 - Google slides for Week 4 (T.B.A.) 
