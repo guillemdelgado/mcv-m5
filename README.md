@@ -15,7 +15,7 @@ TODO: Abstract of the project
 
 
 ## Final report
-The final report details and summaries the work done weekly in the project can be found [here](https://www.overleaf.com/read/xhmmbwjhbnpr). 
+The final report details and summarizes the work done weekly in the project can be found [here](https://www.overleaf.com/read/xhmmbwjhbnpr). 
 
 ## Weekly papers
 - Overleaf document for Week 1 N/A
