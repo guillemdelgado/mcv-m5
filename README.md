@@ -15,7 +15,7 @@ This project aims to put in practice concepts and techniques to develop deep neu
 
 
 ## Final report
-The final report details and summarizes the work done weekly in the project can be found [here](https://www.overleaf.com/read/xhmmbwjhbnpr). 
+The final report details and summarizes the work done weekly in the project can be found [here](https://www.overleaf.com/read/nftwzgfcgmbj). 
 
 ## Weekly papers
 - Overleaf document for Week 1 N/A
