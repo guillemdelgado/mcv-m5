@@ -40,7 +40,8 @@ class Configuration():
         cf.final_savepath = os.path.join(shared_experiments_path, cf.dataset_name,
                                          cf.exp_name)
         cf.log_file = os.path.join(cf.savepath, "logfile.log")
-        if not os.path.exists(cf.savepath):
+        
+	if not os.path.exists(cf.savepath):
             os.makedirs(cf.savepath)
         cf.usr_path = self.usr_path
 
