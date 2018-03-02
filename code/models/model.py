@@ -47,7 +47,7 @@ class One_Net_Model(Model):
                                             verbose=1,
                                             callbacks=cb,
                                             validation_data=valid_gen,
-                                            nb_val_samples=self.cf.dataset.n_images_valid,
+					    validation_steps = self.cf.dataset.n_images_valid // self.cf.batch_size_valid,
                                             class_weight=None,
                                             max_q_size=10,
                                             nb_worker=1,
