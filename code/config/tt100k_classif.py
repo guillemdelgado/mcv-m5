@@ -10,12 +10,13 @@ freeze_layers_from           = None            # Freeze layers from 0 to this la
 show_model                   = False           # Show the architecture layers
 load_imageNet                = False           # Load Imagenet weights and normalize following imagenet procedure
 load_pretrained              = False           # Load a pretrained model for doing finetuning
+weights_file_pretrained      = None            # Pretrained weights file name
 weights_file                 = 'weights.hdf5'  # Training weight file name
 
 # Parameters
 train_model                  = True            # Train the model
-test_model                   = False           # Test the model
-pred_model                   = False           # Predict using the model
+test_model                   = True           # Test the model
+pred_model                   = True           # Predict using the model
 
 # Debug
 debug                        = False           # Use only few images for debuging
@@ -99,8 +100,8 @@ TensorBoard_logs_folder      = None             #
 norm_imageNet_preprocess           = False     # Normalize following imagenet procedure
 norm_fit_dataset                   = True      # If True it recompute std and mean from images. Either it uses the std and mean set at the dataset config file
 norm_rescale                       = 1/255.    # Scalar to divide and set range 0-1
-norm_featurewise_center            = False     # Substract mean - dataset
-norm_featurewise_std_normalization = False     # Divide std - dataset
+norm_featurewise_center            = True     # Substract mean - dataset
+norm_featurewise_std_normalization = True     # Divide std - dataset
 norm_samplewise_center             = False     # Substract mean - sample
 norm_samplewise_std_normalization  = False     # Divide std - sample
 norm_gcn                           = False     # Global contrast normalization
