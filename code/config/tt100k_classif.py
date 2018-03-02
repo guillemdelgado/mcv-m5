@@ -44,7 +44,7 @@ seed_valid                   = 1924            # Random seed for the validation 
 seed_test                    = 1924            # Random seed for the testing shuffle
 
 # Training parameters
-optimizer                    = 'rmsprop'       # Optimizer
+optimizer                    = 'adam'       # Optimizer
 learning_rate                = 0.0001          # Training learning rate
 weight_decay                 = 0.              # Weight decay or L2 parameter norm penalty
 n_epochs                     = 30              # Number of epochs during training
@@ -57,15 +57,15 @@ save_results_n_legend_rows   = 1               # Number of rows when showwing th
 
 # Callback early stoping
 earlyStopping_enabled        = True            # Enable the Callback
-earlyStopping_monitor        = 'acc'           # Metric to monitor
-earlyStopping_mode           = 'max'           # Mode ['max' | 'min']
-earlyStopping_patience       = 100             # Max patience for the early stopping
+earlyStopping_monitor        = 'val_loss'           # Metric to monitor
+earlyStopping_mode           = 'min'           # Mode ['max' | 'min']
+earlyStopping_patience       = 10             # Max patience for the early stopping
 earlyStopping_verbose        = 0               # Verbosity of the early stopping
 
 # Callback model check point
 checkpoint_enabled           = True            # Enable the Callback
-checkpoint_monitor           = 'acc'           # Metric to monitor
-checkpoint_mode              = 'max'           # Mode ['max' | 'min']
+checkpoint_monitor           = 'val_loss'           # Metric to monitor
+checkpoint_mode              = 'min'           # Mode ['max' | 'min']
 checkpoint_save_best_only    = True            # Save best or last model
 checkpoint_save_weights_only = True            # Save only weights or also model
 checkpoint_verbose           = 0               # Verbosity of the checkpoint
