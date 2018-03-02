@@ -163,7 +163,7 @@ class Model_Factory():
         # Load pretrained weights
         if cf.load_pretrained:
             print('   loading model weights from: ' + cf.weights_file + '...')
-            model.load_weights(cf.weights_file, by_name=True)
+            model.load_weights(cf.weights_file_pretrained, by_name=True)
 
         # Compile model
         model.compile(loss=loss, metrics=metrics, optimizer=optimizer)
