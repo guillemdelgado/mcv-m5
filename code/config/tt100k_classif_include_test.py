@@ -99,14 +99,13 @@ TensorBoard_logs_folder      = None             #
 norm_imageNet_preprocess           = False     # Normalize following imagenet procedure
 norm_fit_dataset                   = True      # If True it recompute std and mean from images. Either it uses the std and mean set at the dataset config file
 norm_rescale                       = 1/255.    # Scalar to divide and set range 0-1
-norm_featurewise_center            = True     # Substract mean - dataset
-norm_featurewise_std_normalization = True     # Divide std - dataset
-norm_samplewise_center             = False     # Substract mean - sample
-norm_samplewise_std_normalization  = False     # Divide std - sample
+norm_featurewise_center            = False    # Substract mean - dataset
+norm_featurewise_std_normalization = False     # Divide std - dataset
+norm_samplewise_center             = True     # Substract mean - sample
+norm_samplewise_std_normalization  = True     # Divide std - sample
 norm_gcn                           = False     # Global contrast normalization
 norm_zca_whitening                 = False     # Apply ZCA whitening
 cb_weights_method                  = None      # Label weight balance [None | 'median_freq_cost' | 'rare_freq_cost']
-
 # Data augmentation for training
 da_rotation_range                  = 0          # Rnd rotation degrees 0-180
 da_width_shift_range               = 0.0        # Rnd horizontal shift
