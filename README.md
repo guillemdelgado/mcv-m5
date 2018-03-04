@@ -17,6 +17,9 @@ This project aims to put in practice concepts and techniques to develop deep neu
 ## Final report
 The final report details and summarizes the work done weekly in the project can be found [here](https://www.overleaf.com/read/nftwzgfcgmbj). 
 
+## Final Slides
+Link to the Google Slide presentation
+
 ## Datasets Analysis
 He have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/1qLqqRS4AYZBUM-f01pdIpluVP8X4wnHsjYFz7Sntpek/edit?usp=sharing). 
 
@@ -24,17 +27,15 @@ He have manually inspected the data in which we have work to facilitate the inte
 ### Abstract
 In order to choose a good-performing object recognition network for our system, we have tested several CNNs with different architectures. Changing different parameters from *code/config/tt100k_classif.py* we were able to test different datasets and different NN. In addition, we implemented and tested a Deep Network with Stochastic Depth based on Residual Blocks which can be found in *code/models/stochastic_depth.py*
 ### Code
-See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
+Short explanation of the code in the repository
 ### Results
 Results of the different experiments.
 ### How to run the code
-Instructions for using the code in ./code
+See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
 ### Goals
 Indicate the level of completeness of the goals of this week 
-### Slides
-Link to the Google Slide presentation
 ### Weights
-Link to a Google Drive with the weights of the model
+The weights of the different models can be found here.
 
 ## References
 [Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
