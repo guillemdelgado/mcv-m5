@@ -27,15 +27,15 @@ He have manually inspected the data in which we have work to facilitate the inte
 ### Abstract
 In order to choose a good-performing object recognition network for our system, we have tested several CNNs with different architectures. Changing different parameters from *code/config/tt100k_classif.py* we were able to test different datasets and different NN. In addition, we implemented and tested a Deep Network with Stochastic Depth based on Residual Blocks which can be found in *code/models/stochastic_depth.py*
 ### Code
-The code is divided as follows:
+The framework's code is divided as follows:
 
-  * callbacks/ : Folder that handles all the different callbacks involved during training.
-  * config/ : Folder that contains all configuration files for the different experiments done and handles them.
-  * initializations/ : Useful tools for weights initialization.
-  * layers/ : Folder that contains layers not present in Keras such as Deconvolution.
-  * metrics/ : Tools for model evaluation
-  * models/ : Folder that handles all the different models involved in the project.
-  * tools/  : Useful tools to manage deep learning projects.
+  * *callbacks/* : Folder that handles all the different callbacks involved during training.
+  * *config/* : Folder that contains all configuration files for the different experiments done and handles them.
+  * *initializations/* : Useful tools for weights initialization.
+  * *layers/* : Folder that contains layers not present in Keras such as Deconvolution.
+  * *metrics/* : Tools for model evaluation
+  * *models/* : Folder that handles all the different models involved in the project.
+  * *tools/*  : Useful tools to manage deep learning projects.
   
 ### Results
 Results of the different experiments.
