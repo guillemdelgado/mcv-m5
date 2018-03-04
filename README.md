@@ -20,7 +20,7 @@ The final report details and summarizes the work done weekly in the project can 
 ## Datasets Analysis
 He have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/1qLqqRS4AYZBUM-f01pdIpluVP8X4wnHsjYFz7Sntpek/edit?usp=sharing). 
 
-## Week 2
+## Object recognition - Week 2
 ### Abstract
 ### Code
 ### Results
