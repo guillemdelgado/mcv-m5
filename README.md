@@ -20,23 +20,14 @@ The final report details and summarizes the work done weekly in the project can 
 ## Datasets Analysis
 He have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/1qLqqRS4AYZBUM-f01pdIpluVP8X4wnHsjYFz7Sntpek/edit?usp=sharing). 
 
-## Weekly papers
-- Overleaf document for Week 1 N/A
-- Overleaf document for Week 2 (T.B.A.)
-- Overleaf document for Week 3 (T.B.A.)
-- Overleaf document for Week 4 (T.B.A.) 
-- Overleaf document for Week 5 (T.B.A.)
-- Overleaf document for Week 6 (T.B.A.)
-- Overleaf document for Week 7 (T.B.A.)
-
-## Weekly slides
-- Google slides for Week 1 N/A
-- Google slides for Week 2 (T.B.A.)
-- Google slides for Week 3 (T.B.A.)
-- Google slides for Week 4 (T.B.A.) 
-- Google slides for Week 5 (T.B.A.)
-- Google slides for Week 6 (T.B.A.)
-- Google slides for Week 7 (T.B.A.)
+## Week 2
+### Abstract
+### Code
+### Results
+### How to run the code
+### Goals
+### Slides
+### Weights
 
 ## References
 Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).
