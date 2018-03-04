@@ -22,12 +22,19 @@ He have manually inspected the data in which we have work to facilitate the inte
 
 ## Object recognition - Week 2
 ### Abstract
+Short abstract about what you implemented
 ### Code
+Short explanation of the code in the repository
 ### Results
+Results of the different experiments.
 ### How to run the code
+Instructions for using the code
 ### Goals
+Indicate the level of completeness of the goals of this week 
 ### Slides
+Link to the Google Slide presentation
 ### Weights
+Link to a Google Drive with the weights of the model
 
 ## References
 Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).
