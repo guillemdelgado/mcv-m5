@@ -5,8 +5,10 @@
 This repo contains the code to train and evaluate state of the art classification, detection and segmentation methods in a unified Keras framework working with Theano and/or TensorFlow. Pretrained models are also supplied.
 
 ## Available models and how to run
-Note: All the configuration files except the Baseline model and Adam optimizer experiment have samplewise mean substraction and std division as input preprocessing to perform normalization.
+
 ### Classification
+Note: All the configuration files except the Baseline model and Adam optimizer experiment have samplewise mean substraction and std division as input preprocessing to perform normalization.
+
  - [x] VGG16 and VGG19 network as described in [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf).
  
  * Baseline Model using TT100K_trafficSigns Dataset:
