@@ -33,20 +33,24 @@ Results of the different experiments.
 ### How to run the code
 See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
 ### Goals
-Indicate the level of completeness of the goals of this week 
+
 1. Testing the framework:
-- [x] Analyze the dataset, which the summary can be found the Datasets Analysis
-- [x] 
-- [x]
-- [x] 
-- [x] 
-- [x]
-
-2.
-3.
-4.
-5.
-
+- [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](https://github.com/guillemdelgado/mcv-m5/blob/master/README.md#datasets-analysis) section.
+- [x] Calculate the accuracy on train and test sets.
+- [x] Evaluate different techniques in the configuration file.
+- [x] Transfer learning to another dataset.
+- [x] Understand configuration file.
+2. Train networks on different datasets:
+- [x] VGG model from scratch.
+- [x] VGG model fine-tuning with ImageNet weights.
+3. Implementing a new Neural Network:
+- [x] Integrate the new model into the framework.
+- [x] Evaluate the new model on TT100K dataset.
+4. Boost performance
+- [] Data Augmentation.
+- [] Data Preprossesing.
+- [x] Comparative of optimizers.
+- [] Bagging
 ### Weights
 The weights of the different models can be found here.
 
