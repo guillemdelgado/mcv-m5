@@ -38,7 +38,7 @@ The framework's code is divided as follows:
   * *tools/*  : Useful tools to manage deep learning projects.
   
 ### Results
-Results of the different experiments.
+[Results](https://docs.google.com/presentation/d/1_2VD3MA0VBb7Mtlwvp1Wve2bslxj_1RlP51D4AoQJgk/edit?usp=sharing) of the different experiments.
 ### How to run the code
 See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
 ### Goals
