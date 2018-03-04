@@ -22,7 +22,7 @@ He have manually inspected the data in which we have work to facilitate the inte
 
 ## Object recognition - Week 2
 ### Abstract
-Short abstract about what you implemented
+In order to choose a good-performing object recognition network for our system, we have tested several CNNs with different architectures. Changing different parameters from *code/config/tt100k_classif.py* we were able to test different datasets and different NN. In addition, we implemented and tested a Stochastic Neural Network which can be found in *code/models/stochastic_depth.py*
 ### Code
 Short explanation of the code in the repository
 ### Results
