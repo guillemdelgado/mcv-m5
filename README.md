@@ -56,10 +56,9 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 - [x] Integrate the new model into the framework.
 - [x] Evaluate the new model on TT100K dataset.
 4. Boost performance
-- [] Data Augmentation.
-- [] Data Preprossesing.
+- [x] Data Augmentation.
+- [x] Data Preprossesing.
 - [x] Comparative of optimizers.
-- [] Bagging
 ### Weights
 The weights of the different models can be found here.
 
