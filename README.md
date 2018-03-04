@@ -44,5 +44,6 @@ Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for lar
 He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
 
 A. Krizhevsky, “Imagenet classification with deep convolutional neural networks,” in Advances in neural information processing systems, 2012.
+
 G. Huang, “Deep networks with stochastic depth,” in European Conference on Computer Vision, 2016.
 
