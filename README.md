@@ -18,7 +18,7 @@ This project aims to put in practice concepts and techniques to develop deep neu
 The final report details and summarizes the work done weekly in the project can be found [here](https://www.overleaf.com/read/nftwzgfcgmbj). 
 
 ## Final Slides
-Link to the Google Slide presentation
+The final slides for the presentations detailing and summaraizing the work done weekly can be found [here](https://docs.google.com/presentation/d/1ZIXaVrfedYnxIWHwTlNyLQVscnTAmDpMa9mK6FXyt20/edit?usp=sharing).
 
 ## Datasets Analysis
 He have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/1qLqqRS4AYZBUM-f01pdIpluVP8X4wnHsjYFz7Sntpek/edit?usp=sharing). 
