@@ -34,6 +34,19 @@ Results of the different experiments.
 See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
 ### Goals
 Indicate the level of completeness of the goals of this week 
+1. Testing the framework:
+- [x] Analyze the dataset, which the summary can be found the Datasets Analysis
+- [x] 
+- [x]
+- [x] 
+- [x] 
+- [x]
+
+2.
+3.
+4.
+5.
+
 ### Weights
 The weights of the different models can be found here.
 
