@@ -28,7 +28,7 @@ Short explanation of the code in the repository
 ### Results
 Results of the different experiments.
 ### How to run the code
-Instructions for using the code
+Instructions for using the code in ./code
 ### Goals
 Indicate the level of completeness of the goals of this week 
 ### Slides
@@ -37,8 +37,12 @@ Link to the Google Slide presentation
 Link to a Google Drive with the weights of the model
 
 ## References
+[Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
+
 Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).
 
 He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
 
-[Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
+A. Krizhevsky, “Imagenet classification with deep convolutional neural networks,” in Advances in neural information processing systems, 2012.
+G. Huang, “Deep networks with stochastic depth,” in European Conference on Computer Vision, 2016.
+
