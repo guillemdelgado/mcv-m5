@@ -33,5 +33,11 @@ Note: All the configuration files except the Baseline model have samplewise mean
  
          python train.py -c config/kitti_classif_finetune_imagenet.py -e vgg_finetune_imagenet
 
+ - [x] ResNet based DNN with Stochastic Depth as described in [Deep Networks with Stochastic Depth](https://arxiv.org/pdf/1603.09382.pdf).
+ 
+ * Deep Network with Stochastic Depth based on Residual Blocks using TT100k_trafficSigns Dataset:
+          
+          python train.py -c config/tt100k_classif_stochastic_depth.py -e stochastic_depth
+
 
              
