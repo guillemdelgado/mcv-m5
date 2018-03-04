@@ -9,6 +9,7 @@ from keras.utils.vis_utils import plot_model
 #from models.lenet import build_lenet
 #from models.alexNet import build_alexNet
 from models.vgg import build_vgg
+from models.stochastic_depth import build_stochastic_depth_nn
 #from models.resnet import build_resnet50
 #from models.inceptionV3 import build_inceptionV3
 
@@ -74,7 +75,7 @@ class Model_Factory():
     # Creates a Model object (not a Keras model)
     def make(self, cf, optimizer=None):
         if cf.model_name in ['lenet', 'alexNet', 'vgg16', 'vgg19', 'resnet50',
-                             'InceptionV3', 'fcn8', 'unet', 'segnet',
+                             'InceptionV3', 'fcn8', 'unet', 'segnet', 'stochasticDepth',
                              'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo']:
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
@@ -126,6 +127,8 @@ class Model_Factory():
             model = build_densenetFCN(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                       freeze_layers_from=cf.freeze_layers_from,
                                       path_weights=None)
+        elif cf.model_name == 'stochasticDepth':
+            model = build_stochastic_depth_nn(in_shape, cf.dataset.n_classes)
         elif cf.model_name == 'lenet':
             model = build_lenet(in_shape, cf.dataset.n_classes, cf.weight_decay)
         elif cf.model_name == 'alexNet':
