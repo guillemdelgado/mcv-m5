@@ -17,6 +17,9 @@ This project aims to put in practice concepts and techniques to develop deep neu
 ## Final report
 The final report details and summarizes the work done weekly in the project can be found [here](https://www.overleaf.com/read/nftwzgfcgmbj). 
 
+## Datasets Analysis
+He have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/e/2PACX-1vTZc2ddVgfd9SJN_A1Zpp1eDwFtXAIoznf2gZ3O2lA2CcXiI2rN-lvEvAeMPNZKQTuQoRzAkbinDj8m/pub?start=false&loop=false&delayms=3000). 
+
 ## Weekly papers
 - Overleaf document for Week 1 N/A
 - Overleaf document for Week 2 (T.B.A.)
