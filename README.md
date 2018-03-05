@@ -61,7 +61,7 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 - [x] Comparative of optimizers.
 ### Weights
 The weights of the different models can be found [here](https://drive.google.com/open?id=1eoo47p8RaoioJT5NxVRFH5offR7vTjBO).
-As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel is missing the weights of an experiment you are interested just open an issue and as soon as possible we will update this Google Drive with your request. 
+As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
 
 ## References
 [Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
