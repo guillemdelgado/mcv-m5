@@ -60,7 +60,7 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 - [x] Data Preprossesing.
 - [x] Comparative of optimizers.
 ### Weights
-The weights of the different models can be found here.
+The weights of the different models can be found [here](https://drive.google.com/open?id=1eoo47p8RaoioJT5NxVRFH5offR7vTjBO).
 
 ## References
 [Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
