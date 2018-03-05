@@ -19,6 +19,11 @@ Note: All the configuration files except the Baseline model and Adam optimizer e
 
        python train.py -c config/tt100k_classif_adam.py -e vgg_adam_optimizer
        
+ * Basleine Model using Data Augmentation in TT100k:trafficSigns Dataset:
+  
+       python train.py -c config/tt100k_classif_data_augm.py -e vgg_data_augm
+
+       
  * Taking as input crops of (224, 224) dimension using TT100K_trafficSigns Dataset:
  
        python train.py -c config/tt100k_classif_cropping.py -e vgg_cropping
