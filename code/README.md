@@ -19,7 +19,7 @@ Note: All the configuration files except the Baseline model and Adam optimizer e
 
        python train.py -c config/tt100k_classif_adam.py -e vgg_adam_optimizer
        
- * Basleine Model using Data Augmentation in TT100k:trafficSigns Dataset:
+ * Baseline Model using Data Augmentation in TT100k_trafficSigns Dataset:
   
        python train.py -c config/tt100k_classif_data_augm.py -e vgg_data_augm
 
