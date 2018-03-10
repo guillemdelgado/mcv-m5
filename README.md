@@ -64,7 +64,7 @@ The weights of the different models can be found [here](https://drive.google.com
 As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
 
 ## References
-[Summary](https://www.overleaf.com/read/tgxwrbzqdvst)
+[Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
 
 Simonyan, Karen, and Andrew Zisserman. "Very deep convolutional networks for large-scale image recognition." arXiv preprint arXiv:1409.1556 (2014).
 
