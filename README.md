@@ -63,6 +63,8 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 The weights of the different models can be found [here](https://drive.google.com/open?id=1eoo47p8RaoioJT5NxVRFH5offR7vTjBO).
 As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
 
+## Object detection - Week 3 and 4
+
 ## References
 [Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
 
@@ -73,4 +75,10 @@ He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings 
 A. Krizhevsky, “Imagenet classification with deep convolutional neural networks,” in Advances in neural information processing systems, 2012.
 
 G. Huang, “Deep networks with stochastic depth,” in European Conference on Computer Vision, 2016.
+
+Ren, Shaoqing, et al. "Faster r-cnn: Towards real-time object detection with region proposal networks." Advances in neural information processing systems. 2015.
+
+Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
+
+Redmon, Joseph, and Ali Farhadi. "YOLO9000: better, faster, stronger." arXiv preprint 1612 (2016).
 
