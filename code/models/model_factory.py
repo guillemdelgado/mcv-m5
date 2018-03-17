@@ -1,7 +1,7 @@
 import os
-
+import cPickle as pickle
 # Keras imports
-from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics
+from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, SSDMetrics
 from keras import backend as K
 from keras.utils.vis_utils import plot_model
 
@@ -9,13 +9,13 @@ from keras.utils.vis_utils import plot_model
 #from models.lenet import build_lenet
 #from models.alexNet import build_alexNet
 from models.vgg import build_vgg
-from models.stochastic_depth import build_stochastic_depth_nn
 #from models.resnet import build_resnet50
 #from models.inceptionV3 import build_inceptionV3
 
 # Detection models
-#from models.yolo import build_yolo
-
+from models.yolo import build_yolo
+from models.faster_rcnn import build_faster_rcnn
+from models.ssd import build_ssd
 # Segmentation models
 #from models.fcn8 import build_fcn8
 
@@ -45,12 +45,21 @@ class Model_Factory():
             loss = 'categorical_crossentropy'
             metrics = ['accuracy']
         elif cf.dataset.class_mode == 'detection':
-            in_shape = (cf.dataset.n_channels,
-                        cf.target_size_train[0],
-                        cf.target_size_train[1])
-            # TODO detection : check model, different detection nets may have different losses and metrics
-            loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
-            metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors)]
+            if cf.model_name == 'yolo' or cf.model_name == 'tiny-yolo':
+                in_shape = (cf.dataset.n_channels,
+                            cf.target_size_train[0],
+                            cf.target_size_train[1])
+                # TODO detection  : check model, different detection nets may have different losses and metrics
+                loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
+                metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_recall'),YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_iou')]
+            elif cf.model_name == 'ssd':
+                 in_shape = (cf.target_size_train[0],
+                             cf.target_size_train[1], cf.dataset.n_channels)
+                 loss = MultiboxLoss(cf.dataset.n_classes, neg_pos_ratio=2.0).compute_loss
+                 metrics = None
+                 #metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors)]
+                 #priors = pickle.load(open('prior_boxes_ssd300.pkl', 'rb'))
+                 #metrics = [SSDMetrics(priors, cf.dataset.n_classes)]
         elif cf.dataset.class_mode == 'segmentation':
             if K.image_dim_ordering() == 'th':
                 if variable_input_size:
@@ -75,8 +84,8 @@ class Model_Factory():
     # Creates a Model object (not a Keras model)
     def make(self, cf, optimizer=None):
         if cf.model_name in ['lenet', 'alexNet', 'vgg16', 'vgg19', 'resnet50',
-                             'InceptionV3', 'fcn8', 'unet', 'segnet', 'stochasticDepth',
-                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo']:
+                             'InceptionV3', 'fcn8', 'unet', 'segnet',
+                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo', 'frcnn', 'ssd']:
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
 
@@ -127,8 +136,6 @@ class Model_Factory():
             model = build_densenetFCN(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                       freeze_layers_from=cf.freeze_layers_from,
                                       path_weights=None)
-        elif cf.model_name == 'stochasticDepth':
-            model = build_stochastic_depth_nn(in_shape, cf.dataset.n_classes)
         elif cf.model_name == 'lenet':
             model = build_lenet(in_shape, cf.dataset.n_classes, cf.weight_decay)
         elif cf.model_name == 'alexNet':
@@ -160,13 +167,20 @@ class Model_Factory():
                                cf.dataset.n_priors,
                                load_pretrained=cf.load_imageNet,
                                freeze_layers_from=cf.freeze_layers_from, tiny=True)
+        elif cf.model_name == 'ssd':
+            model = build_ssd(in_shape, cf.dataset.n_classes + 1,
+                               load_pretrained=cf.load_imageNet,
+                               freeze_layers_from=cf.freeze_layers_from)
+        elif cf.model_name == 'frcnn':
+            model =  build_faster_rcnn(in_shape, cf.dataset.n_classes, cf.dataset.n_priors, cf.dataset.n_priors,
+                                       load_pretrained=False,freeze_layers_from=cf.freeze_layers_from)
         else:
             raise ValueError('Unknown model')
 
         # Load pretrained weights
         if cf.load_pretrained:
-            print('   loading model weights from: ' + cf.weights_file + '...')
-            model.load_weights(cf.weights_file_pretrained, by_name=True)
+            print('   loading model weights from: ' + cf.pretrained_weights_file + '...')
+            model.load_weights(cf.pretrained_weights_file, by_name=True)
 
         # Compile model
         model.compile(loss=loss, metrics=metrics, optimizer=optimizer)
