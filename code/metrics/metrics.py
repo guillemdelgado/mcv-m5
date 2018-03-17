@@ -113,9 +113,6 @@ def IoU(n_classes, void_labels):
     code adapted from https://github.com/thtrieu/darkflow/
 """
 
-def logistic_activate_tensor(x):
-    return 1. / (1. + tf.exp(-x))
-
 def YOLOLoss(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.5], [1.0,1.0], [1.7,1.7], [2.5,2.5]],max_truth_boxes=30,thresh=0.6,object_scale=5.0,noobject_scale=1.0,coord_scale=1.0,class_scale=1.0):
 
   # Def custom loss function using numpy
@@ -135,11 +132,12 @@ def YOLOLoss(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.
       # Extract the coordinate prediction from net.out
       coords = net_out_reshape[:, :, :, :, :4]
       coords = tf.reshape(coords, [-1, h*w, b, 4])
-      adjusted_coords_xy = logistic_activate_tensor(coords[:,:,:,0:2])
-      adjusted_coords_wh = tf.sqrt(tf.exp(coords[:,:,:,2:4]) * np.reshape(anchors, [1, 1, b, 2]) / np.reshape([w, h], [1, 1, 1, 2]))
+      adjusted_coords_xy = tf.sigmoid(coords[:,:,:,0:2])
+      adjusted_coords_wh = tf.exp(tf.clip_by_value(coords[:,:,:,2:4], -1e3, 10)) * np.reshape(anchors, [1, 1, b, 2]) / np.reshape([w, h], [1, 1, 1, 2])
+      adjusted_coords_wh = tf.sqrt(tf.clip_by_value(adjusted_coords_wh, 1e-10, 1e5))
       coords = tf.concat([adjusted_coords_xy, adjusted_coords_wh], 3)
 
-      adjusted_c = logistic_activate_tensor(net_out_reshape[:, :, :, :, 4])
+      adjusted_c = tf.sigmoid(net_out_reshape[:, :, :, :, 4])
       adjusted_c = tf.reshape(adjusted_c, [-1, h*w, b, 1])
 
       adjusted_prob = tf.nn.softmax(net_out_reshape[:, :, :, :, 5:])
@@ -147,7 +145,7 @@ def YOLOLoss(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.
 
       adjusted_net_out = tf.concat([adjusted_coords_xy, adjusted_coords_wh, adjusted_c, adjusted_prob], 3)
 
-      wh = tf.pow(coords[:,:,:,2:4], 2) *  np.reshape([w, h], [1, 1, 1, 2])
+      wh = tf.square(coords[:,:,:,2:4]) *  np.reshape([w, h], [1, 1, 1, 2])
       area_pred = wh[:,:,:,0] * wh[:,:,:,1]
       centers = coords[:,:,:,0:2]
       floor = centers - (wh * .5)
@@ -177,7 +175,7 @@ def YOLOLoss(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.
       true = tf.concat([_coord, tf.expand_dims(confs, 3), _probs ], 3)
       wght = tf.concat([cooid, tf.expand_dims(conid, 3), proid ], 3)
 
-      loss = tf.pow(adjusted_net_out - true, 2)
+      loss = tf.square(adjusted_net_out - true)
       loss = tf.multiply(loss, wght)
       loss = tf.reshape(loss, [-1, h*w*b*(4 + 1 + num_classes)])
       loss = tf.reduce_sum(loss, 1)
@@ -191,9 +189,9 @@ def YOLOLoss(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.
     YOLO detection metrics
     code adapted from https://github.com/thtrieu/darkflow/
 """
-def YOLOMetrics(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.5], [1.0,1.0], [1.7,1.7], [2.5,2.5]],max_truth_boxes=30,thresh=0.6,nms_thresh=0.3):
+def YOLOMetrics(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5,0.5], [1.0,1.0], [1.7,1.7], [2.5,2.5]],max_truth_boxes=30,thresh=0.6,nms_thresh=0.3,name='avg_iou'):
 
-  def _YOLOMetrics(y_true, y_pred, name=None):
+  def avg_recall(y_true, y_pred, name=None):
       net_out = tf.transpose(y_pred, perm=[0, 2, 3, 1])
 
       _,h,w,c = net_out.get_shape().as_list()
@@ -208,11 +206,12 @@ def YOLOMetrics(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5
       # Extract the coordinate prediction from net.out
       coords = net_out_reshape[:, :, :, :, :4]
       coords = tf.reshape(coords, [-1, h*w, b, 4])
-      adjusted_coords_xy = logistic_activate_tensor(coords[:,:,:,0:2])
-      adjusted_coords_wh = tf.sqrt(tf.exp(coords[:,:,:,2:4]) * np.reshape(anchors, [1, 1, b, 2]) / np.reshape([w, h], [1, 1, 1, 2]))
+      adjusted_coords_xy = tf.sigmoid(coords[:,:,:,0:2])
+      adjusted_coords_wh = tf.exp(tf.clip_by_value(coords[:,:,:,2:4], -1e3, 10)) * np.reshape(anchors, [1, 1, b, 2]) / np.reshape([w, h], [1, 1, 1, 2])
+      adjusted_coords_wh = tf.sqrt(tf.clip_by_value(adjusted_coords_wh, 1e-10, 1e5))
       coords = tf.concat([adjusted_coords_xy, adjusted_coords_wh], 3)
 
-      adjusted_c = logistic_activate_tensor(net_out_reshape[:, :, :, :, 4])
+      adjusted_c = tf.sigmoid(net_out_reshape[:, :, :, :, 4])
       adjusted_c = tf.reshape(adjusted_c, [-1, h*w, b, 1])
 
       adjusted_prob = tf.nn.softmax(net_out_reshape[:, :, :, :, 5:])
@@ -220,7 +219,7 @@ def YOLOMetrics(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5
 
       adjusted_net_out = tf.concat([adjusted_coords_xy, adjusted_coords_wh, adjusted_c, adjusted_prob], 3)
 
-      wh = tf.pow(coords[:,:,:,2:4], 2) *  np.reshape([w, h], [1, 1, 1, 2])
+      wh = tf.square(coords[:,:,:,2:4]) *  np.reshape([w, h], [1, 1, 1, 2])
       area_pred = wh[:,:,:,0] * wh[:,:,:,1]
       centers = coords[:,:,:,0:2]
       floor = centers - (wh * .5)
@@ -237,12 +236,249 @@ def YOLOMetrics(input_shape=(3,640,640),num_classes=45,priors=[[0.25,0.25], [0.5
       iou = tf.truediv(intersect, _areas + area_pred - intersect)
       best_ious     = tf.reduce_max(iou, [2], True)
       recall        = tf.reduce_sum(tf.to_float(tf.greater(best_ious,0.5)), [1])
+      gt_obj_areas  = tf.reduce_mean(_areas, [2], True)
+      num_gt_obj    = tf.reduce_sum(tf.to_float(tf.greater(gt_obj_areas,tf.zeros_like(gt_obj_areas))), [1])
+      avg_recall    = tf.truediv(recall, num_gt_obj)
+ 
+      return tf.reduce_mean(avg_recall)
+
+  def avg_iou(y_true, y_pred, name=None):
+      net_out = tf.transpose(y_pred, perm=[0, 2, 3, 1])
+
+      _,h,w,c = net_out.get_shape().as_list()
+      b = len(priors)
+      anchors = np.array(priors)
+
+      _probs, _confs, _coord, _areas, _upleft, _botright = tf.split(y_true, [num_classes,1,4,1,2,2], axis=3)
+      _confs = tf.squeeze(_confs,3)
+      _areas = tf.squeeze(_areas,3)
+
+      net_out_reshape = tf.reshape(net_out, [-1, h, w, b, (4 + 1 + num_classes)])
+      # Extract the coordinate prediction from net.out
+      coords = net_out_reshape[:, :, :, :, :4]
+      coords = tf.reshape(coords, [-1, h*w, b, 4])
+      adjusted_coords_xy = tf.sigmoid(coords[:,:,:,0:2])
+      adjusted_coords_wh = tf.exp(tf.clip_by_value(coords[:,:,:,2:4], -1e3, 10)) * np.reshape(anchors, [1, 1, b, 2]) / np.reshape([w, h], [1, 1, 1, 2])
+      adjusted_coords_wh = tf.sqrt(tf.clip_by_value(adjusted_coords_wh, 1e-10, 1e5))
+      coords = tf.concat([adjusted_coords_xy, adjusted_coords_wh], 3)
+
+      adjusted_c = tf.sigmoid(net_out_reshape[:, :, :, :, 4])
+      adjusted_c = tf.reshape(adjusted_c, [-1, h*w, b, 1])
+
+      adjusted_prob = tf.nn.softmax(net_out_reshape[:, :, :, :, 5:])
+      adjusted_prob = tf.reshape(adjusted_prob, [-1, h*w, b, num_classes])
+
+      adjusted_net_out = tf.concat([adjusted_coords_xy, adjusted_coords_wh, adjusted_c, adjusted_prob], 3)
+
+      wh = tf.square(coords[:,:,:,2:4]) *  np.reshape([w, h], [1, 1, 1, 2])
+      area_pred = wh[:,:,:,0] * wh[:,:,:,1]
+      centers = coords[:,:,:,0:2]
+      floor = centers - (wh * .5)
+      ceil  = centers + (wh * .5)
+
+      # calculate the intersection areas
+      intersect_upleft   = tf.maximum(floor, _upleft)
+      intersect_botright = tf.minimum(ceil, _botright)
+      intersect_wh = intersect_botright - intersect_upleft
+      intersect_wh = tf.maximum(intersect_wh, 0.0)
+      intersect = tf.multiply(intersect_wh[:,:,:,0], intersect_wh[:,:,:,1])
+
+      # calculate the best IOU and metrics 
+      iou = tf.truediv(intersect, _areas + area_pred - intersect)
+      best_ious     = tf.reduce_max(iou, [2], True)
       sum_best_ious = tf.reduce_sum(best_ious, [1])
       gt_obj_areas  = tf.reduce_mean(_areas, [2], True)
       num_gt_obj    = tf.reduce_sum(tf.to_float(tf.greater(gt_obj_areas,tf.zeros_like(gt_obj_areas))), [1])
       avg_iou       = tf.truediv(sum_best_ious, num_gt_obj)
-      avg_recall    = tf.truediv(recall, num_gt_obj)
  
-      return {'avg_iou':tf.reduce_mean(avg_iou), 'avg_recall':tf.reduce_mean(avg_recall)}
-  return _YOLOMetrics
+      return tf.reduce_mean(avg_iou)
 
+  if name=='avg_iou':
+    return avg_iou
+  else:
+    return avg_recall
+
+class MultiboxLoss(object):
+    """
+    CREDIT: https://github.com/rykov8/ssd_keras
+    Multibox loss with some helper functions.
+    # Arguments
+        num_classes: Number of classes including background.
+        alpha: Weight of L1-smooth loss.
+        neg_pos_ratio: Max ratio of negative to positive boxes in loss.
+        background_label_id: Id of background label.
+        negatives_for_hard: Number of negative boxes to consider
+            it there is no positive boxes in batch.
+    # References
+        https://arxiv.org/abs/1512.02325
+    # TODO
+        Add possibility for background label id be not zero
+    """
+
+    def __init__(self, num_classes, alpha=1.0, neg_pos_ratio=3.0,
+                 background_label_id=0, negatives_for_hard=100.0):
+        self.num_classes = num_classes
+        self.alpha = alpha
+        self.neg_pos_ratio = neg_pos_ratio
+        if background_label_id != 0:
+            raise Exception('Only 0 as background label id is supported')
+        self.background_label_id = background_label_id
+        self.negatives_for_hard = negatives_for_hard
+
+    def _l1_smooth_loss(self, y_true, y_pred):
+        """Compute L1-smooth loss.
+        # Arguments
+            y_true: Ground truth bounding boxes,
+                tensor of shape (?, num_boxes, 4).
+            y_pred: Predicted bounding boxes,
+                tensor of shape (?, num_boxes, 4).
+        # Returns
+            l1_loss: L1-smooth loss, tensor of shape (?, num_boxes).
+        # References
+            https://arxiv.org/abs/1504.08083
+        """
+        abs_loss = tf.abs(y_true - y_pred)
+        sq_loss = 0.5 * (y_true - y_pred) ** 2
+        l1_loss = tf.where(tf.less(abs_loss, 1.0), sq_loss, abs_loss - 0.5)
+        return tf.reduce_sum(l1_loss, -1)
+
+    def _softmax_loss(self, y_true, y_pred):
+        """Compute softmax loss.
+        # Arguments
+            y_true: Ground truth targets,
+                tensor of shape (?, num_boxes, num_classes).
+            y_pred: Predicted logits,
+                tensor of shape (?, num_boxes, num_classes).
+        # Returns
+            softmax_loss: Softmax loss, tensor of shape (?, num_boxes).
+        """
+        y_pred = tf.maximum(tf.minimum(y_pred, 1 - 1e-15), 1e-15)
+        softmax_loss = -tf.reduce_sum(y_true * tf.log(y_pred),
+                                      axis=-1)
+        return softmax_loss
+
+    def compute_loss(self, y_true, y_pred):
+        """Compute mutlibox loss.
+        # Arguments
+            y_true: Ground truth targets,
+                tensor of shape (?, num_boxes, 4 + num_classes + 8),
+                priors in ground truth are fictitious,
+                y_true[:, :, -8] has 1 if prior should be penalized
+                    or in other words is assigned to some ground truth box,
+                y_true[:, :, -7:] are all 0.
+            y_pred: Predicted logits,
+                tensor of shape (?, num_boxes, 4 + num_classes + 8).
+        # Returns
+            loss: Loss for prediction, tensor of shape (?,).
+        """
+        batch_size = tf.shape(y_true)[0]
+        num_boxes = tf.to_float(tf.shape(y_true)[1])
+
+        # loss for all priors
+        conf_loss = self._softmax_loss(y_true[:, :, 4:-8],
+                                       y_pred[:, :, 4:-8])
+        loc_loss = self._l1_smooth_loss(y_true[:, :, :4],
+                                        y_pred[:, :, :4])
+
+        # get positives loss
+        num_pos = tf.reduce_sum(y_true[:, :, -8], axis=-1)
+        pos_loc_loss = tf.reduce_sum(loc_loss * y_true[:, :, -8],
+                                     axis=1)
+        pos_conf_loss = tf.reduce_sum(conf_loss * y_true[:, :, -8],
+                                      axis=1)
+
+        # get negatives loss, we penalize only confidence here
+        num_neg = tf.minimum(self.neg_pos_ratio * num_pos,
+                             num_boxes - num_pos)
+        pos_num_neg_mask = tf.greater(num_neg, 0)
+        has_min = tf.to_float(tf.reduce_any(pos_num_neg_mask))
+        num_neg = tf.concat(axis=0, values=[num_neg,
+                                            [(1 - has_min) * self.negatives_for_hard]])
+        num_neg_batch = tf.reduce_min(tf.boolean_mask(num_neg,
+                                                      tf.greater(num_neg, 0)))
+        num_neg_batch = tf.to_int32(num_neg_batch)
+        confs_start = 4 + self.background_label_id + 1
+        confs_end = confs_start + self.num_classes - 1
+        max_confs = tf.reduce_max(y_pred[:, :, confs_start:confs_end],
+                                  axis=2)
+        _, indices = tf.nn.top_k(max_confs * (1 - y_true[:, :, -8]),
+                                 k=num_neg_batch)
+        batch_idx = tf.expand_dims(tf.range(0, batch_size), 1)
+        batch_idx = tf.tile(batch_idx, (1, num_neg_batch))
+        full_indices = (tf.reshape(batch_idx, [-1]) * tf.to_int32(num_boxes) +
+                        tf.reshape(indices, [-1]))
+        # full_indices = tf.concat(2, [tf.expand_dims(batch_idx, 2),
+        #                              tf.expand_dims(indices, 2)])
+        # neg_conf_loss = tf.gather_nd(conf_loss, full_indices)
+        neg_conf_loss = tf.gather(tf.reshape(conf_loss, [-1]),
+                                  full_indices)
+        neg_conf_loss = tf.reshape(neg_conf_loss,
+                                   [batch_size, num_neg_batch])
+        neg_conf_loss = tf.reduce_sum(neg_conf_loss, axis=1)
+
+        # loss is sum of positives and negatives
+        total_loss = pos_conf_loss + neg_conf_loss
+        total_loss /= (num_pos + tf.to_float(num_neg_batch))
+        num_pos = tf.where(tf.not_equal(num_pos, 0), num_pos,
+                           tf.ones_like(num_pos))
+        total_loss += (self.alpha * pos_loc_loss) / num_pos
+        return total_loss
+
+
+def SSDMetrics(input_shape=(3, 640, 640),
+               num_classes=45,
+               priors=None):
+    def _SSDMetrics(y_true, y_pred, name=None):
+        net_out = tf.transpose(y_pred, perm=[0, 2, 3, 1])
+
+        _, h, w, c = net_out.get_shape().as_list()
+        b = len(priors)
+        anchors = np.array(priors)
+
+        _probs, _confs, _coord, _areas, _upleft, _botright = tf.split(y_true, [num_classes, 1, 4, 1, 2, 2], axis=3)
+        _confs = tf.squeeze(_confs, 3)
+        _areas = tf.squeeze(_areas, 3)
+
+        net_out_reshape = tf.reshape(net_out, [-1, h, w, b, (4 + 1 + num_classes)])
+        # Extract the coordinate prediction from net.out
+        coords = net_out_reshape[:, :, :, :, :4]
+        coords = tf.reshape(coords, [-1, h * w, b, 4])
+        adjusted_coords_xy = logistic_activate_tensor(coords[:, :, :, 0:2])
+        adjusted_coords_wh = tf.sqrt(
+            tf.exp(coords[:, :, :, 2:4]) * np.reshape(anchors, [1, 1, b, 2]) / np.reshape([w, h], [1, 1, 1, 2]))
+        coords = tf.concat([adjusted_coords_xy, adjusted_coords_wh], 3)
+
+        adjusted_c = logistic_activate_tensor(net_out_reshape[:, :, :, :, 4])
+        adjusted_c = tf.reshape(adjusted_c, [-1, h * w, b, 1])
+
+        adjusted_prob = tf.nn.softmax(net_out_reshape[:, :, :, :, 5:])
+        adjusted_prob = tf.reshape(adjusted_prob, [-1, h * w, b, num_classes])
+
+        adjusted_net_out = tf.concat([adjusted_coords_xy, adjusted_coords_wh, adjusted_c, adjusted_prob], 3)
+
+        wh = tf.pow(coords[:, :, :, 2:4], 2) * np.reshape([w, h], [1, 1, 1, 2])
+        area_pred = wh[:, :, :, 0] * wh[:, :, :, 1]
+        centers = coords[:, :, :, 0:2]
+        floor = centers - (wh * .5)
+        ceil = centers + (wh * .5)
+
+        # calculate the intersection areas
+        intersect_upleft = tf.maximum(floor, _upleft)
+        intersect_botright = tf.minimum(ceil, _botright)
+        intersect_wh = intersect_botright - intersect_upleft
+        intersect_wh = tf.maximum(intersect_wh, 0.0)
+        intersect = tf.multiply(intersect_wh[:, :, :, 0], intersect_wh[:, :, :, 1])
+
+        # calculate the best IOU and metrics
+        iou = tf.truediv(intersect, _areas + area_pred - intersect)
+        best_ious = tf.reduce_max(iou, [2], True)
+        recall = tf.reduce_sum(tf.to_float(tf.greater(best_ious, 0.5)), [1])
+        sum_best_ious = tf.reduce_sum(best_ious, [1])
+        gt_obj_areas = tf.reduce_mean(_areas, [2], True)
+        num_gt_obj = tf.reduce_sum(tf.to_float(tf.greater(gt_obj_areas, tf.zeros_like(gt_obj_areas))), [1])
+        avg_iou = tf.truediv(sum_best_ious, num_gt_obj)
+        avg_recall = tf.truediv(recall, num_gt_obj)
+
+        return {'avg_iou': tf.reduce_mean(avg_iou), 'avg_recall': tf.reduce_mean(avg_recall)}
+
+    return _SSDMetrics
