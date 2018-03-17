@@ -17,8 +17,9 @@ import threading
 from keras import backend as K
 
 from tools.save_images import save_img2
-#from tools.yolo_utils import yolo_build_gt_batch
-
+from tools.yolo_utils import yolo_build_gt_batch
+#from tools.frcnn_utils import BBoxUtility
+from tools.ssd_utils import BBoxUtility
 def array_to_img(x, dim_ordering='default', scale=True):
     """Converts a 3D Numpy array to a PIL Image instance.
     # Arguments
@@ -350,7 +351,8 @@ class ImageDataGenerator(object):
                  class_mode='categorical',
                  rgb_mean=None,
                  rgb_std=None,
-                 crop_size=None):
+                 crop_size=None, 
+                 yolo = False):
         if dim_ordering == 'default':
             dim_ordering = K.image_dim_ordering()
         self.__dict__.update(locals())
@@ -358,7 +360,7 @@ class ImageDataGenerator(object):
         # self.rescale = rescale
         self.preprocessing_function = preprocessing_function
         self.cb_weights = None
-
+        self.yolo = yolo
         if dim_ordering not in {'tf', 'th'}:
             raise Exception('dim_ordering should be "tf" (channel after row '
                             'and column) or "th" (channel before row and '
@@ -430,7 +432,7 @@ class ImageDataGenerator(object):
             batch_size=batch_size, shuffle=shuffle, seed=seed,
             gt_directory=gt_directory,
             save_to_dir=save_to_dir, save_prefix=save_prefix,
-            save_format=save_format)
+            save_format=save_format, enable_yolo = self.yolo)
 
     def flow_from_directory2(self, directory,
                              resize=None, target_size=(256, 256),
@@ -1112,7 +1114,7 @@ class DirectoryIterator(Iterator):
                  dim_ordering='default',
                  classes=None, class_mode='categorical',
                  batch_size=32, shuffle=True, seed=None, gt_directory=None,
-                 save_to_dir=None, save_prefix='', save_format='jpeg'):
+                 save_to_dir=None, save_prefix='', save_format='jpeg', enable_yolo=False):
         # Check dim order
         if dim_ordering == 'default':
             dim_ordering = K.image_dim_ordering()
@@ -1125,6 +1127,7 @@ class DirectoryIterator(Iterator):
         self.save_to_dir = save_to_dir
         self.save_prefix = save_prefix
         self.save_format = save_format
+        self.yolo = enable_yolo
 
         # Check target size
         if target_size is None and batch_size > 1:
@@ -1177,6 +1180,8 @@ class DirectoryIterator(Iterator):
         self.filenames = []
         self.classes = []
 
+	self.ssd_generator = BBoxUtility(self.nb_class)
+        #self.frcnn_generator = BBoxUtility(self.nb_class)
         # Get filenames
         if self.class_mode == 'detection':
             for fname in os.listdir(directory):
@@ -1319,7 +1324,11 @@ class DirectoryIterator(Iterator):
         elif self.class_mode == 'detection':
             # TODO detection: check model, other networks may expect a different batch_y format and shape
             # YOLOLoss expects a particular batch_y format and shape
-            batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
+            if self.yolo:
+                batch_y = yolo_build_gt_batch(batch_y, self.image_shape, self.nb_class)
+            else:
+                #batch_y = self.frcnn_generator.ssd_build_gt_batch(batch_y, self.image_shape)
+                batch_y = self.ssd_generator.ssd_build_gt_batch(batch_y, self.image_shape)
         elif self.class_mode == None:
             return batch_x
 
