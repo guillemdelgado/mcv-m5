@@ -47,4 +47,25 @@ Note: All the configuration files except the Baseline model and Adam optimizer e
           python train.py -c config/tt100k_classif_stochastic_depth.py -e stochastic_depth
 
 
+### Detection
+
+ * YOLO Model with TT100k Dataset:
+ 
+        python train.py -c config/yolo_baseline.py -e experiment_name
+        
+ * YOLO Model with Udacity Dataset:
+ 
+        python train.py -c config/yolo_baseline.py -e experiment_name
+        
+ * SSD Model with TT100k Dataset:
+ 
+        python train.py -c config/tt100k_ssd300.py -e experiment_name
+        
+ * SSD Model with Udacity Dataset:
+ 
+         python train.py -c config/udacity_ssd300.py -e experiment_name
+         
+ * Evaluate SSD Model:
+ 
+         python eval_fscore.py
              
