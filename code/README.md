@@ -67,5 +67,5 @@ Note: All the configuration files except the Baseline model and Adam optimizer e
          
  * Evaluate SSD Model:
  
-         python eval_fscore.py
+         python eval_fscore.py ssd DATASETNAME /path_of_weights /path_to_test_Data
              
