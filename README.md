@@ -23,6 +23,10 @@ The final slides for the presentations detailing and summaraizing the work done 
 ## Datasets Analysis
 We have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/1qLqqRS4AYZBUM-f01pdIpluVP8X4wnHsjYFz7Sntpek/edit?usp=sharing). 
 
+## Weights
+The weights of the different models can be found [here](https://drive.google.com/open?id=1eoo47p8RaoioJT5NxVRFH5offR7vTjBO).
+As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
+
 ## Object recognition - Week 2
 ### Abstract
 In order to choose a good-performing object recognition network for our system, we have tested several CNNs with different architectures. Changing different parameters from *code/config/tt100k_classif.py* we were able to test different datasets and different NN. In addition, we implemented and tested a Deep Network with Stochastic Depth based on Residual Blocks which can be found in *code/models/stochastic_depth.py*
@@ -59,13 +63,11 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 - [x] Data Augmentation.
 - [x] Data Preprossesing.
 - [x] Comparative of optimizers.
-### Weights
-The weights of the different models can be found [here](https://drive.google.com/open?id=1eoo47p8RaoioJT5NxVRFH5offR7vTjBO).
-As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
+
 
 ## Object detection - Week 3 and 4
 ### Abstract
-For object detection we have considered two single-shot models: You Only Look Once (YOLO) with the smaller model, Tiny-YOLO, and Single-Shot Multibox Detector (SSD). All these models have been trained to detect a variety of traffic signs in the TT100K detection dataset and to detect pedestrians, cars and trucks in the Udacity dataset.
+For object detection we have considered two single-shot models: You Only Look Once (YOLO) with the smaller model, Tiny-YOLO, and Single-Shot Multibox Detector (SSD). All these models have been trained to detect a variety of traffic signs in the TT100K detection dataset and to detect pedestrians, cars and trucks in the Udacity dataset. Faster-RCNN was tried but it is not included due to difficulties to upgrade it to newest Keras version.
 ### Code
 The contributions done for these weeks are:
 
@@ -95,9 +97,6 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 - [x] Data Augmentation.
 - [x] Data Preprossesing.
 - [x] Comparative of optimizers.
-### Weights
-The weights of the different models can be found [here](X).
-As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
 
 ## References
 [Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
