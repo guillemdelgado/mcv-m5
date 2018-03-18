@@ -48,24 +48,32 @@ Note: All the configuration files except the Baseline model and Adam optimizer e
 
 
 ### Detection
+ - [x] YOLO9000 and Tiny-YOLO as described in [YOLO9000: better, faster, stronger](http://openaccess.thecvf.com/content_cvpr_2017/papers/Redmon_YOLO9000_Better_Faster_CVPR_2017_paper.pdf).
 
  * YOLO Model with TT100k Dataset:
  
-        python train.py -c config/yolo_baseline.py -e experiment_name
+        python train.py -c config/tt100k_yolo.py -e yolo_baseline
         
+ * YOLO Model using Data Augmentation with TT100k Dataset:
+ 
+       python train.py -c config/tt100k_yolo_da.py -e yolo_data_augm
+        
+ * Tiny-YOLO Model with TT100k Dataset:
+ 
+       python train.py -c config/tt100k_tiny_yolo.py -e tiny_yolo_baseline
+ 
  * YOLO Model with Udacity Dataset:
  
-        python train.py -c config/yolo_baseline.py -e experiment_name
+        python train.py -c config/udacity_yolo.py -e yolo_baseline
         
+ - [x] SSD as described in [Ssd: Single shot multibox detector](https://arxiv.org/pdf/1512.02325).     
+ 
  * SSD Model with TT100k Dataset:
  
-        python train.py -c config/tt100k_ssd300.py -e experiment_name
+        python train.py -c config/tt100k_ssd.py -e ssd_baseline
         
  * SSD Model with Udacity Dataset:
  
-         python train.py -c config/udacity_ssd300.py -e experiment_name
+         python train.py -c config/udacity_ssd.py -e ssd_baseline
          
- * Evaluate SSD Model:
- 
-         python eval_fscore.py ssd DATASETNAME /path_of_weights /path_to_test_Data
              
