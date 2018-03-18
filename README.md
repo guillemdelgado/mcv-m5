@@ -64,6 +64,40 @@ The weights of the different models can be found [here](https://drive.google.com
 As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
 
 ## Object detection - Week 3 and 4
+### Abstract
+X
+### Code
+The contributions done for these weeks are:
+
+  * *callbacks/* : Folder that handles all the different callbacks involved during training.
+  * *config/* : Folder that contains all configuration files for the different experiments done and handles them.
+  * *initializations/* : Useful tools for weights initialization.
+  * *layers/* : Folder that contains layers not present in Keras such as Deconvolution.
+  * *metrics/* : Tools for model evaluation
+  * *models/* : Folder that handles all the different models involved in the project.
+  * *tools/*  : Useful tools to manage deep learning projects.
+  
+### Results
+[Results](link) of the different experiments.
+### How to run the code
+See this [README](link) to know how to run the code and run the experiments.
+### Goals
+
+1. YOLOv2 model in TT100k Dataset:
+- [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](x) section.
+- [x] Calculate the F-score.
+2. Summary of references
+- [x] Summary of Yolo and F-RCNN.
+3. Implementing a new Neural Network:
+- [x] Integrate the new model (SSD) into the framework.
+- [x] Evaluate the new model on BOTH datasets.
+4. Boost performance
+- [x] Data Augmentation.
+- [x] Data Preprossesing.
+- [x] Comparative of optimizers.
+### Weights
+The weights of the different models can be found [here](X).
+As the size of weights files is huge there are just the most successful experiments for each dataset and network. However, if you feel there are missing the weights of an experiment you are interested in, just open an issue and we will update this Google Drive with your request ASAP. 
 
 ## References
 [Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
