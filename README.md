@@ -65,20 +65,17 @@ As the size of weights files is huge there are just the most successful experime
 
 ## Object detection - Week 3 and 4
 ### Abstract
-X
+For object detection we have considered two single-shot models: You Only Look Once (YOLO) with the smaller model, Tiny-YOLO, and Single-Shot Multibox Detector (SSD). All these models have been trained to detect a variety of traffic signs in the TT100K detection dataset and to detect pedestrians, cars and trucks in the Udacity dataset.
 ### Code
 The contributions done for these weeks are:
 
-  * *callbacks/* : Folder that handles all the different callbacks involved during training.
-  * *config/* : Folder that contains all configuration files for the different experiments done and handles them.
-  * *initializations/* : Useful tools for weights initialization.
-  * *layers/* : Folder that contains layers not present in Keras such as Deconvolution.
-  * *metrics/* : Tools for model evaluation
-  * *models/* : Folder that handles all the different models involved in the project.
-  * *tools/*  : Useful tools to manage deep learning projects.
+  * *eval_fscore.py/* : Evaluate the object detection methods.
+  * *layers/ssd_layers.py* : Layers needed for the SSD model
+  * *models/ssd.py* : SSD Model.
+  * *tools/ssd_utils*  : Utils needed for the SSD Model.
   
 ### Results
-[Results](link) of the different experiments.
+[Results](https://docs.google.com/presentation/d/1ZIXaVrfedYnxIWHwTlNyLQVscnTAmDpMa9mK6FXyt20/edit?usp=sharing) of the different experiments.
 ### How to run the code
 See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
 ### Goals
