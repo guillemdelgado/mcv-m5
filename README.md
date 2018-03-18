@@ -86,12 +86,15 @@ See this [README](link) to know how to run the code and run the experiments.
 1. YOLOv2 model in TT100k Dataset:
 - [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](x) section.
 - [x] Calculate the F-score.
-2. Summary of references
+2. Summary of references:
 - [x] Summary of Yolo and F-RCNN.
 3. Implementing a new Neural Network:
 - [x] Integrate the new model (SSD) into the framework.
 - [x] Evaluate the new model on BOTH datasets.
-4. Boost performance
+4. Train the networks on a different dataset:
+- [x] Evaluate the YOLO on BOTH datasets.
+- [x] Evaluate the SSD on BOTH datasets.
+5. Boost performance:
 - [x] Data Augmentation.
 - [x] Data Preprossesing.
 - [x] Comparative of optimizers.
