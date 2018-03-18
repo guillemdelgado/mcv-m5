@@ -80,11 +80,11 @@ The contributions done for these weeks are:
 ### Results
 [Results](link) of the different experiments.
 ### How to run the code
-See this [README](link) to know how to run the code and run the experiments.
+See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
 ### Goals
 
 1. YOLOv2 model in TT100k Dataset:
-- [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](x) section.
+- [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](https://github.com/guillemdelgado/mcv-m5/blob/master/README.md#datasets-analysis) section.
 - [x] Calculate the F-score.
 2. Summary of references:
 - [x] Summary of Yolo and F-RCNN.
