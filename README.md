@@ -71,7 +71,6 @@ For object detection we have considered two single-shot models: You Only Look On
 ### Code
 The contributions done for these weeks are:
 
-  * *eval_fscore.py/* : Evaluate the object detection methods.
   * *layers/ssd_layers.py* : Layers needed for the SSD model
   * *models/ssd.py* : SSD Model.
   * *tools/ssd_utils*  : Utils needed for the SSD Model.
@@ -114,4 +113,6 @@ Ren, Shaoqing, et al. "Faster r-cnn: Towards real-time object detection with reg
 Redmon, Joseph, et al. "You only look once: Unified, real-time object detection." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
 
 Redmon, Joseph, and Ali Farhadi. "YOLO9000: better, faster, stronger." arXiv preprint 1612 (2016).
+
+Liu, Wei, et al. "Ssd: Single shot multibox detector." European conference on computer vision. Springer, Cham, 2016.
 
