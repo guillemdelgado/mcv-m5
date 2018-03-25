@@ -85,7 +85,7 @@ def main():
     parser.add_argument('-s', '--shared_path', type=str,
                         default='/data', help='Path to shared data folder')
     parser.add_argument('-l', '--local_path', type=str,
-                        default='/data', help='Path to local data folder')
+                        default='/datatmp', help='Path to local data folder')
 
     arguments = parser.parse_args()
 
@@ -99,10 +99,10 @@ def main():
     # Define the user paths
     shared_path = arguments.shared_path
     local_path = arguments.local_path
-    dataset_path = os.path.join(local_path,'module5', 'Datasets')
-    shared_dataset_path = os.path.join(shared_path,'module5', 'Datasets')
-    experiments_path = os.path.join('./Experiments')
-    shared_experiments_path = './Experiments_shared'
+    dataset_path = os.path.join(local_path, 'Datasets')
+    shared_dataset_path = os.path.join(shared_path, 'Datasets')
+    experiments_path = os.path.join(local_path, getuser(), 'Experiments')
+    shared_experiments_path = os.path.join(shared_path, getuser(), 'Experiments')
     usr_path = os.path.join('/home/', getuser())
 
     # Load configuration files
