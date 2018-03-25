@@ -40,8 +40,7 @@ class Configuration():
         cf.final_savepath = os.path.join(shared_experiments_path, cf.dataset_name,
                                          cf.exp_name)
         cf.log_file = os.path.join(cf.savepath, "logfile.log")
-        
-	if not os.path.exists(cf.savepath):
+        if not os.path.exists(cf.savepath):
             os.makedirs(cf.savepath)
         cf.usr_path = self.usr_path
 
@@ -99,9 +98,12 @@ class Configuration():
 
         # Plot metrics
         if cf.dataset.class_mode == 'segmentation':
-            cf.train_metrics = ['loss', 'acc', 'jaccard']
-            cf.valid_metrics = ['val_loss', 'val_acc', 'val_jaccard']
-            cf.best_metric = 'val_jaccard'
+            #cf.train_metrics = ['loss', 'acc', 'jaccard']
+            #cf.valid_metrics = ['val_loss', 'val_acc', 'val_jaccard']
+            #cf.best_metric = 'val_jaccard'
+            cf.train_metrics = ['loss', 'acc', 'jaccard_coef']
+            cf.valid_metrics = ['val_loss', 'val_acc', 'val_jaccard_coef']
+            cf.best_metric = 'val_jaccard_coef'
             cf.best_type = 'max'
         elif cf.dataset.class_mode == 'detection':
             # TODO detection : different nets may have other metrics
@@ -162,3 +164,4 @@ class Configuration():
             copy_tree(self.configuration.savepath, self.configuration.final_savepath)
             open(os.path.join(self.configuration.final_savepath, 'lock'), 'w').close()
             print ('   Copy time: ' + str(time.time()-start))
+
