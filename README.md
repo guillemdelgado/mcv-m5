@@ -103,7 +103,9 @@ Three different models have been tried during these weeks. Starting by FCN-8, we
 ### Code
 The contributions done for these weeks are:
 
-  *
+  * models/unet.py: U-Net Model
+  * models/segnet.py: SegNet Model
+  * predictions.py: Script that generates the mask predictions.
   
 ### Results
 [Results](https://docs.google.com/presentation/d/1ZIXaVrfedYnxIWHwTlNyLQVscnTAmDpMa9mK6FXyt20/edit?usp=sharing) of the different experiments.
