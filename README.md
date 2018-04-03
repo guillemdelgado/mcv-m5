@@ -100,6 +100,25 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 ## Object Segmentation - Week 5 and 6
 ### Abstract
 Three different models have been tried during these weeks. Starting by FCN-8, we have explored different regularization methods not tried in previous weeks, such as batch normalization, and trained the model in different datasets (CamVid, Cityscapes and KITTI). Segnet and Unet have been also adapted to Keras 2.0 and tested on CamVid dataset. 
+### Code
+The contributions done for these weeks are:
+
+  *
+  
+### Results
+[Results](https://docs.google.com/presentation/d/1ZIXaVrfedYnxIWHwTlNyLQVscnTAmDpMa9mK6FXyt20/edit?usp=sharing) of the different experiments.
+### How to run the code
+See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/README.md) to know how to run the code and run the experiments.
+### Goals
+
+1. FCN8 model:
+- [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](https://github.com/guillemdelgado/mcv-m5/blob/master/README.md#datasets-analysis) section.
+2. Summary of references:
+- [x] Summary of FCN( and SegNet.
+3. Implementing a new Neural Network:
+- [x] Integrate the new model (SegNet) into the framework.
+4. Train the networks on a different dataset:
+5. Boost performance:
 ## References
 [Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
 
@@ -118,4 +137,6 @@ Redmon, Joseph, et al. "You only look once: Unified, real-time object detection.
 Redmon, Joseph, and Ali Farhadi. "YOLO9000: better, faster, stronger." arXiv preprint 1612 (2016).
 
 Liu, Wei, et al. "Ssd: Single shot multibox detector." European conference on computer vision. Springer, Cham, 2016.
+
+Long, Jonathan, Evan Shelhamer, and Trevor Darrell. "Fully convolutional networks for semantic segmentation." Proceedings of the IEEE conference on computer vision and pattern recognition. 2015.
 
