@@ -97,6 +97,9 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 - [x] Data Preprossesing.
 - [x] Comparative of optimizers.
 
+## Object Segmentation - Week 5 and 6
+### Abstract
+Three different models have been tried during these weeks. Starting by FCN-8, we have explored different regularization methods not tried in previous weeks, such as batch normalization, and trained the model in different datasets (CamVid, Cityscapes and KITTI). Segnet and Unet have been also adapted to Keras 2.0 and tested on CamVid dataset. 
 ## References
 [Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
 
