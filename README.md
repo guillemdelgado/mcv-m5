@@ -114,11 +114,18 @@ See this [README](https://github.com/guillemdelgado/mcv-m5/blob/master/code/READ
 1. FCN8 model:
 - [x] Analyze the dataset, which the summary can be found the [Datasets Analysis](https://github.com/guillemdelgado/mcv-m5/blob/master/README.md#datasets-analysis) section.
 2. Summary of references:
-- [x] Summary of FCN( and SegNet.
+- [x] Summary of FCN and SegNet.
 3. Implementing a new Neural Network:
 - [x] Integrate the new model (SegNet) into the framework.
+- [x] Integrate the new model (unet) into the framework.
 4. Train the networks on a different dataset:
+- [x] Evaluate FCN8 for Cityscapes and KITTI.
 5. Boost performance:
+- [x] Comparative of batch sizes.
+- [x] Comparative or learning rates.
+- [x] Comparative of optimizers.
+- [x] Batch normalitzation.
+- [x] Data augmentation for unet.
 ## References
 [Summaries](https://www.overleaf.com/read/tgxwrbzqdvst)
 
