@@ -77,3 +77,48 @@ Note: All the configuration files except the Baseline model and Adam optimizer e
          python train.py -c config/udacity_ssd.py -e ssd_baseline
          
              
+### Segmentation
+
+- [x] Fully Convolutional Networks as described in [Fully convolutional networks for semantic segmentation](https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/2B_011.pdf)
+
+  * FCN-8 with pretrained weights on ImageNet with CamVid Dataset:
+    
+         python train.py -c config/camvid_fcn.py -e fcn_baseline
+         
+  * FCN-8 trained from scratch with CamVid Dataset:
+  
+         python train.py -c config/camvid_fcn_scratch.py -e fcn_scratch
+         
+  * FCN-8 using Adam optimizer with CamVid Dataset:
+  
+         python train.py -c config/camvid_fcn_adam.py -e fcn_adam
+         
+  * FCN-8 using SGD optimizer with CamVid Dataset:
+  
+         python train.py -c config/camvid_fcn_sgd.py -e fcn_sgd
+              
+   * FCN-8 using Batch Normalization with CamVid Dataset:
+  
+         python train.py -c config/camvid_fcn_batchnorm.py -e fcn_batchnorm
+              
+   * FCN-8 baseline with Cityscapes Dataset:
+  
+         python train.py -c config/cityscapes_fcn.py -e fcn_cityscapes
+         
+   * FCN-8 baseline with KITTI Dataset:
+  
+         python train.py -c config/kitti_fcn.py -e fcn_kitti
+         
+- [x] U-Net as described in [U-net: Convolutional networks for biomedical image segmentation](https://link.springer.com/chapter/10.1007/978-3-319-24574-4_28)   
+
+   * U-Net baseline with CamVid Dataset:
+  
+         python train.py -c config/camvid_unet.py -e unet_baseline
+- [x] SegNet as described in [Segnet: A deep convolutional encoder-decoder architecture for image segmentation](http://ieeexplore.ieee.org/iel7/34/8094206/07803544.pdf)   
+         
+   * SegNet baseline with CamVid Dataset:
+  
+         python train.py -c config/camvid_segnet.py -e segnet_baseline
+              
+         
+             
