@@ -1,7 +1,7 @@
 import os
-import cPickle as pickle
+
 # Keras imports
-from metrics.metrics import cce_flatt, IoU, YOLOLoss, YOLOMetrics, MultiboxLoss, SSDMetrics
+from metrics.metrics import cce_flatt, jaccard_coef, cce_flatt, IoU, YOLOLoss, YOLOMetrics
 from keras import backend as K
 from keras.utils.vis_utils import plot_model
 
@@ -14,14 +14,14 @@ from models.vgg import build_vgg
 
 # Detection models
 from models.yolo import build_yolo
-from models.faster_rcnn import build_faster_rcnn
-from models.ssd import build_ssd
+
 # Segmentation models
-#from models.fcn8 import build_fcn8
-
+from models.fcn8 import build_fcn8
+from models.segnet import build_segnet
+from models.unet import build_unet, VGGUnet
 # Adversarial models
-#from models.adversarial_semseg import Adversarial_Semseg
-
+from models.adversarial_semseg import Adversarial_Semseg
+from models.gan import GAN
 from models.model import One_Net_Model
 
 
@@ -45,21 +45,12 @@ class Model_Factory():
             loss = 'categorical_crossentropy'
             metrics = ['accuracy']
         elif cf.dataset.class_mode == 'detection':
-            if cf.model_name == 'yolo' or cf.model_name == 'tiny-yolo':
-                in_shape = (cf.dataset.n_channels,
-                            cf.target_size_train[0],
-                            cf.target_size_train[1])
-                # TODO detection  : check model, different detection nets may have different losses and metrics
-                loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
-                metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_recall'),YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_iou')]
-            elif cf.model_name == 'ssd':
-                 in_shape = (cf.target_size_train[0],
-                             cf.target_size_train[1], cf.dataset.n_channels)
-                 loss = MultiboxLoss(cf.dataset.n_classes, neg_pos_ratio=2.0).compute_loss
-                 metrics = None
-                 #metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors)]
-                 #priors = pickle.load(open('prior_boxes_ssd300.pkl', 'rb'))
-                 #metrics = [SSDMetrics(priors, cf.dataset.n_classes)]
+            in_shape = (cf.dataset.n_channels,
+                        cf.target_size_train[0],
+                        cf.target_size_train[1])
+            # TODO detection : check model, different detection nets may have different losses and metrics
+            loss = YOLOLoss(in_shape, cf.dataset.n_classes, cf.dataset.priors)
+            metrics = [YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_recall'),YOLOMetrics(in_shape, cf.dataset.n_classes, cf.dataset.priors,name='avg_iou')]
         elif cf.dataset.class_mode == 'segmentation':
             if K.image_dim_ordering() == 'th':
                 if variable_input_size:
@@ -75,8 +66,10 @@ class Model_Factory():
                     in_shape = (cf.target_size_train[0],
                                 cf.target_size_train[1],
                                 cf.dataset.n_channels)
-            loss = cce_flatt(cf.dataset.void_class, cf.dataset.cb_weights)
-            metrics = [IoU(cf.dataset.n_classes, cf.dataset.void_class)]
+            #loss = cce_flatt(cf.dataset.void_class, cf.dataset.cb_weights)
+            #metrics = [IoU(cf.dataset.n_classes, cf.dataset.void_class)]
+            loss='categorical_crossentropy'
+            metrics=['accuracy',jaccard_coef]
         else:
             raise ValueError('Unknown problem type')
         return in_shape, loss, metrics
@@ -84,12 +77,12 @@ class Model_Factory():
     # Creates a Model object (not a Keras model)
     def make(self, cf, optimizer=None):
         if cf.model_name in ['lenet', 'alexNet', 'vgg16', 'vgg19', 'resnet50',
-                             'InceptionV3', 'fcn8', 'unet', 'segnet',
-                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo', 'frcnn', 'ssd']:
+                             'InceptionV3', 'fcn8', 'unet', 'unet_vgg', 'segnet_vgg',
+                             'segnet_basic', 'resnetFCN', 'yolo', 'tiny-yolo']:
             if optimizer is None:
                 raise ValueError('optimizer can not be None')
 
-            in_shape, loss, metrics = self.basic_model_properties(cf, True)
+            in_shape, loss, metrics = self.basic_model_properties(cf, False)
             model = self.make_one_net_model(cf, in_shape, loss, metrics,
                                             optimizer)
 
@@ -101,6 +94,10 @@ class Model_Factory():
             in_shape, _, _ = self.basic_model_properties(cf, False)
             model = Adversarial_Semseg(cf, in_shape)
 
+        elif cf.model_name == 'gan':
+            # loss, metrics and optimizer are made in class Adversarial_Semseg
+            in_shape, _, _ = self.basic_model_properties(cf, False)
+            model = GAN(cf, in_shape)
         else:
             raise ValueError('Unknown model name')
 
@@ -115,19 +112,22 @@ class Model_Factory():
         if cf.model_name == 'fcn8':
             model = build_fcn8(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                freeze_layers_from=cf.freeze_layers_from,
-                               path_weights=cf.load_imageNet)
+                               load_pretrained=cf.load_imageNet, include_batch_norm=cf.batch_norm)
         elif cf.model_name == 'unet':
-            model = build_unet(in_shape, cf.dataset.n_classes, cf.weight_decay,
-                               freeze_layers_from=cf.freeze_layers_from,
-                               path_weights=None)
+            model = build_unet(in_shape, cf.dataset.n_classes)
+        elif cf.model_name == 'unet_vgg':
+            model = VGGUnet(cf.dataset.n_classes, in_shape)
+
         elif cf.model_name == 'segnet_basic':
-            model = build_segnet(in_shape, cf.dataset.n_classes, cf.weight_decay,
-                                 freeze_layers_from=cf.freeze_layers_from,
-                                 path_weights=None, basic=True)
+            #model = build_segnet((360, 480,3), cf.dataset.n_classes, cf.weight_decay,
+            #                     freeze_layers_from=cf.freeze_layers_from,
+            #                     path_weights=None, basic=True)
+            model = build_segnet(in_shape, cf.dataset.n_classes)
         elif cf.model_name == 'segnet_vgg':
-            model = build_segnet(in_shape, cf.dataset.n_classes, cf.weight_decay,
-                                 freeze_layers_from=cf.freeze_layers_from,
-                                 path_weights=None, basic=False)
+            #model = build_segnet((360, 480, 3), cf.dataset.n_classes, cf.weight_decay,
+            #                     freeze_layers_from=cf.freeze_layers_from,
+            #                     path_weights=None, basic=False)
+            model = build_segnet(in_shape, cf.dataset.n_classes)
         elif cf.model_name == 'resnetFCN':
             model = build_resnetFCN(in_shape, cf.dataset.n_classes, cf.weight_decay,
                                     freeze_layers_from=cf.freeze_layers_from,
@@ -167,20 +167,13 @@ class Model_Factory():
                                cf.dataset.n_priors,
                                load_pretrained=cf.load_imageNet,
                                freeze_layers_from=cf.freeze_layers_from, tiny=True)
-        elif cf.model_name == 'ssd':
-            model = build_ssd(in_shape, cf.dataset.n_classes + 1,
-                               load_pretrained=cf.load_imageNet,
-                               freeze_layers_from=cf.freeze_layers_from)
-        elif cf.model_name == 'frcnn':
-            model =  build_faster_rcnn(in_shape, cf.dataset.n_classes, cf.dataset.n_priors, cf.dataset.n_priors,
-                                       load_pretrained=False,freeze_layers_from=cf.freeze_layers_from)
         else:
             raise ValueError('Unknown model')
 
         # Load pretrained weights
         if cf.load_pretrained:
-            print('   loading model weights from: ' + cf.pretrained_weights_file + '...')
-            model.load_weights(cf.pretrained_weights_file, by_name=True)
+            print('   loading model weights from: ' + cf.weights_file + '...')
+            model.load_weights(cf.weights_file, by_name=True)
 
         # Compile model
         model.compile(loss=loss, metrics=metrics, optimizer=optimizer)
