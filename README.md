@@ -20,6 +20,8 @@ The final report details and summarizes the work done weekly in the project can 
 ## Final Slides
 The final slides for the presentations detailing and summaraizing the work done weekly can be found [here](https://docs.google.com/presentation/d/1ZIXaVrfedYnxIWHwTlNyLQVscnTAmDpMa9mK6FXyt20/edit?usp=sharing).
 
+[4/4/2018](https://docs.google.com/presentation/d/1xdK0pvYC2CRrfHeHlFrYj4nJSa7pRU2Pmyl1iXqLUUg/edit?usp=sharing)
+
 ## Datasets Analysis
 We have manually inspected the data in which we have work to facilitate the interpretation of the results obtained. Find the data set analysis [here](https://docs.google.com/presentation/d/1qLqqRS4AYZBUM-f01pdIpluVP8X4wnHsjYFz7Sntpek/edit?usp=sharing). 
 
